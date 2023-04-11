@@ -1,176 +1,138 @@
+# Clothing class with aggregation and composition
 class Clothing:
-    # material = ""
-    type = ""
-
-    def __init__(self, name, color : str, size, season, polymer_percent, cotton_percent'''pocket : pocket'''):
-        self.name = name
-        self.colors = color
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell):
         self.size = size
-        self.fabric = fabric(color, polymer_percent, cotton_percent)
-        self.season = season
-        self.polymer_percent = polymer_percent
-        self.cotton_percent = cotton_percent
-
-    def check_p_cotton(self):
-        return "This {} contains {} percent of cotton".format(self.name, self.cotton_percent)
-
-    def check_p_polymer(self):
-        return "This {} contains {} percent of polymer".format(self.name, self.polymer_percent)
-
-    def season(self):
-        return "{} is usually used in {}".format(self.name, self.season)
-
-    def color(self):
-        return "This {} is {}".format(self.name, self.color)
-
-    def change_color(self, color):
         self.color = color
-
-    def size(self):
-        return "This {} is {}".format(self.name, self.size)
-
-    def change_size(self, size):
-        self.size = size
-
-
-# /////////////////////////////////////////////////////////////////////////////////////////////
-class Shirt(Clothing):
-    # material = "Cotton"
-    type = "shirt"
-
-    def __init__(self, name, color, size, season, polymer_percent, cotton_percent, pocket, model):
-        super().__init__(name, color, size, season, polymer_percent, cotton_percent)
-        self.pocket = pocket
-        self.model = model
-
-    def sit_pocket(self):
-        if self.pocket is None :
-            return "The shirt, does not have pocket"
-        else :
-            return "The shirt, {}".format(self.pocket)  # The shirt, (has pocket) or (does not have pocket)
-
-    def model(self):
-        return "The shirt is {}".format(self.model)  # The shirt is (long sleeve) or (short sleeve)
-
-
-polo = Shirt("Polo", "red", 'XL', "spring", 60, 40, 'has pocket', 'long sleeve')
-print(polo.size)
-polo.change_size('XXL')
-print(polo.size)
-
-
-# print(polo.size())  ???
-# //////////////////////////////////////////////////////////////////////////////////////
-class Tshirt(Clothing):
-    # material = "Cotton"
-    type = "t-shirt"
-
-    def __init__(self, name, color, size, season, polymer_percent, cotton_percent, model, style):
-        super().__init__(name, color, size, season, polymer_percent, cotton_percent)
-        self.style = style
-        self.model = model
-
-    def model(self):
-        return "This t-shirt is {}".format(self.model)  # This t-shirt is (v-neck) or (ringer)
-
-    def style(self):
-        return "This t-shirt's is {} t-shirt".format(self.style)  # This t-shirt is (singlet) or (normal) t-shirt
- 
-#////////////////////////////////////////////////////////////////////////////////////////
-class Socks(Clothing):
-    # material = "Cotton"
-    type = "socks"
-
-    def __init__(self, name, color, size, season, polymer_percent, cotton_percent, height, pattern):
-        super().__init__(name, color, size, season, polymer_percent, cotton_percent)
-        self.height = height
-        self.pattern = pattern
-    def get_height(self):
-        return "The sock's height is {}".format(self.height)
-    def get_pattern(self):
-        return "Sock's pattern is {}".format(self.pattern)
-       
-#/////////////////////////////////////////////////////////////////////////////////////////
-class Jacket(Clothing):
-    # material = "Cotton"
-    type = 'jacket'
-
-    def __init__(self, name, color, size, season, polymer_percent, cotton_percent, brand, price):
-        super().__init__(name, color, size, season, polymer_percent, cotton_percent)
         self.brand = brand
         self.price = price
 
-    def get_brand(self):
-        return "This jacket belongs to the {} brand".format(self.brand) #This jacket belongs to the boss brand
+        self.zipper = Zip
+        self.pocket = Pock
+        self.buttons = Butt
+        self.lining = Lin
+        self.embellishments = Embell
 
-    def get_price(self):
-        return "The price of this jacket is {} dollars".format(self.price) #The price of this jacket is 2 dollars
+        self.fabric = Fabric()
+        self.thread = Thread()
 
-mmd_jacket = Jacket('Bomber', 'red', 'XL', 'Winter', 15, 85, 'boss', 2)
-print(mmd_jacket.get_price())
-
-#/////////////////////////////////////////////////////////////////////////////////////
-class Jeans(Clothing):
-    # material = "Cotton"
-    type = 'jeans'
-
-    def __init__(self, name, color, size, season, polymer_percent, cotton_percent, pocket_num, fly):
-        super().__init__(name, color, size, season, polymer_percent, cotton_percent)
-        self.pocket_num = pocket_num
-        self.fly = fly
-
-    def get_pocketnum(self):
-        return "These jeans have {} pockets".format(self.pocket_num) #These jeans have 5 pockets
-
-    def get_flytype(self):
-        return "The fly of these jeans is {}".format(self.fly) #The fly of these jeans is zipper
-#//////////////////////////////////////////////////////////////////////////////////
-class Shorts(Clothing):
-    # material = "Cotton"
-    type = 'shorts'
-
-    def __init__(self, name, color, size, season, polymer_percent, cotton_percent, s_type, pocket):
-        super().__init__(name, color, size, season, polymer_percent, cotton_percent)
-        self.s_type = s_type
-        self.pocket = pocket
-
-    def get_stype(self):
-        return "These shorts are {}".format(self.s_type) #These shorts are boxer
-
-    def get_flytype(self):
-        return "These shorts have pocket : {}".format(self.pocket) #These shorts have pocket : True
-
-#//////////////////////////////////////////////////////////////////////////////////
-class fabric():
-    # material = ""
-    type = ""
-
-    def __init__(self, color, season, polymer_percent, cotton_percent):
-        self.colors = color
-        self.polymer_percent = polymer_percent
-        self.cotton_percent = cotton_percent
-
-    def check_p_cotton(self):
-        return "This {} contains {} percent of cotton".format(self.name, self.cotton_percent)
-
-    def check_p_polymer(self):
-        return "This {} contains {} percent of polymer".format(self.name, self.polymer_percent)
-
-    def color(self):
-        return "This {} is {}".format(self.name, self.color)
-
-    def change_color(self, color):
-        self.color = color
-
-# ???? 5
-#///////////////////////////////////////////////////////////////////////////////////
-
+    def get_zipper(self):
+        return self.zipper.get_zip()
     
+    def get_pocket(self):
+        return self.pocket.get_pock()
+    
+    def get_button(self):
+        return self.button.get_butt()
+    
+    def get_lining(self):
+        return self.lining.get_lin()
+    
+    def get_embellishment(self):
+        return self.embellishments.get_embell()
+    
+    def wash(self):
+        print("Washing instructions: Machine wash cold, tumble dry low")
+    
+    def iron(self):
+        print("Ironing instructions: Iron on low heat")
+
+# Aggregation classes
+class Zipper:
+    def __init__(self, ziptype : bool):
+        self.ziptype = ziptype
+        self.length = 10
+        self.color = 'silver'
+
+    def zip_up(self):
+        print("Zipper is now zipped up")
+    
+    def get_zip(self):
+        if self.ziptype == True:
+            print("The clothing have zipper")
+        else :
+            print("The clothing does not have zipper")
+
+class Pocket:
+    def __init__(self, pocktype : bool):
+        self.pocktype = pocktype
+        self.number_of_pockets = 2
+        self.size = 'medium'
+
+    def put_item(self):
+        print("Item has been put in pocket")
+
+    def get_pock(self):
+        if self.pocktype == True:
+            print("The clothing has pocket")
+        else :
+            print("The clothing does not have pocket")
+
+class Buttons:
+    def __init__(self, butttype : bool):
+        self.butttype = butttype
+        self.number_of_buttons = 5
+        self.color = 'black'
+
+    def add_button(self):
+        print("A new button has been added")
+    
+    def get_butt(self):
+        if self.butttype == True:
+            print("The clothing has button")
+        else :
+            print("The clothing does not have button")
+
+class Lining:
+    def __init__(self, lintype : bool):
+        self.lintype = lintype
+        self.type = 'satin'
+        self.color = 'white'
+
+    def change_lining(self, new_type, new_color):
+        self.type = new_type
+        self.color = new_color
+        print(f"Lining has been changed to {self.color} {self.type}")
+
+    def get_lin(self):
+        if self.lintype == True:
+            print("The clothing has lining")
+        else :
+            print("The clothing does not have lining")
+
+
+class Embellishments:
+    def __init__(self, embelltype : bool):
+        self.embelltype = embelltype
+        self.type = 'beads'
+        self.color = 'gold'
+
+    def add_embellishment(self):
+        print("An embellishment has been added")   
+
+    def get_embell(self):
+        if self.embelltype == True:
+            print("The clothing has embellishment")
+        else :
+            print("The clothing does not have embellishment")
+
+       
+# Composition classes
+class Fabric:
+    def __init__(self):
+        self.type = 'cotton'
+        self.pattern = 'solid'
+
+    def change_color(self, new_color):
+        self.pattern = 'solid'
+        print(f"Fabric pattern has been changed to {self.pattern} {new_color}")
+
+class Thread:
+    def __init__(self):
+        self.color = 'white'
+        self.type = 'polyester'
+
+    def change_thread(self, new_color, new_type):
+        self.color = new_color
+        self.type = new_type
+        print(f"Thread has been changed to {self.color} {self.type}")
         
-        
-
-
-
-
-
-
