@@ -120,11 +120,23 @@ class Thread:
         self.type = new_type
         print(f"Thread has been changed to {self.color} {self.type}")
 
-# Child classes with polymorphism
+# Child classes with polymorphism (iron, wash)
 class Shirt(Clothing):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell)
         self.sleeve_length = sleeve_length
+
+    def get_neck(self):
+        if  33.5 <= self.sleeve_length < 34 :
+            print("This shirt has 17-17.5 neck")
+        elif  34 <= self.sleeve_length < 34.5 :
+            print("This shirt has 17.5-18 neck")
+        elif  34.5 <= self.sleeve_length < 35 :
+            print("This shirt has 18-18.5 neck")
+        elif  35 <= self.sleeve_length < 35.5 :
+            print("This shirt has 18.5-19 neck")
+        elif  35.5 <= self.sleeve_length < 36 :
+            print("This shirt has 19-19.5 neck")
 
     def iron(self):
         print("Ironing instructions: Iron on medium heat")
@@ -167,18 +179,124 @@ class Jacket(Clothing):
 
     def get_zip(self):
         return self
-    #?????????????????????????????????????????????????????????????????????
 
 # testing inharitance and aggregation 
-mmd = Jacket("XL", "red", "sinsin", 18, Zipper, True, Pocket, Buttons, Lining, Embellishments, False)
-mmd.iron()
-mmd.hoodhood()
-mmd.get_zipper()
+obj0 = Jacket("XL", "red", "sinsin", 18, Zipper, True, Pocket, Buttons, Lining, Embellishments, False)
+obj0.iron()
+obj0.hoodhood()
+obj0.get_zipper()
+print("End of obj0 (jacket)")
+print("")
 
 # testing composition
-ali = Socks("medium", "white", "jj", 5, Zipper, Pocket, Buttons, Lining, Embellishments, 'cotton')
-ali.wash()
-ali.get_button()
-ali.fabric.change_color("blue")
+obj1 = Socks("medium", "white", "jj", 5, Zipper, Pocket, Buttons, Lining, Embellishments, 'cotton')
+obj1.wash()
+obj1.get_button()
+obj1.fabric.change_color("blue")
+print("End of obj1 (socks)")
+print("")
+
+# Grandchild classes for Shirt
+class TShirt(Shirt):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length, graphic):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length)
+        self.graphic = graphic
+
+    def get_graphic(self):
+        print("This attractive t-shirt has {} design on it".format(self.graphic))
 
 
+class DressShirt(Shirt):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length, collar_type):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length)
+        self.collar_type = collar_type
+
+class PoloShirt(Shirt):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length, material_type):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length)
+        self.material_type = material_type
+
+# Grandchild classes for Jeans
+class SkinnyJeans(Jeans):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, ripped):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
+        self.ripped = ripped
+
+class BootcutJeans(Jeans):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, inseam):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
+        self.inseam = inseam
+
+class StraightJeans(Jeans):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, stretch):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
+        self.stretch = stretch
+        
+# Grandchild classes for Shorts
+class CargoShorts(Shorts):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length, number_of_pockets):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length)
+        self.number_of_pockets = number_of_pockets
+
+class BoardShorts(Shorts):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length, pattern):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length)
+        self.pattern = pattern
+
+class DenimShorts(Shorts):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length, cuffs):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length)
+        self.cuffs = cuffs
+        
+# Grandchild classes for Socks
+class AnkleSocks(Socks):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, material, number_of_pairs):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, material)
+        self.number_of_pairs = number_of_pairs
+
+class AthleticSocks(Socks):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, material, arch_support):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, material)
+        self.arch_support = arch_support
+
+class DressSocks(Socks):
+    def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, material, pattern):
+        super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, material)
+        self.pattern = pattern
+        
+# Grandchild classes for Jacket
+class Windbreaker(Jacket):
+    def __init__(self, size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded, waterproof):
+        super().__init__(size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded)
+        self.waterproof = waterproof
+
+class BomberJacket(Jacket):
+    def __init__(self, size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded, material_type):
+        super().__init__(size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded)
+        self.material_type = material_type
+
+class FleeceJacket(Jacket):
+    def __init__(self, size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded, zip_num):
+        super().__init__(size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded)
+        self.zip_num = zip_num
+
+    def get_zip_num(self):
+        print("This jacket has {} zippers".format(self.zip_num))
+
+# testing grand child class
+obj2 = TShirt("XL", "yellow", "zak", 12, Zipper, Pocket, Buttons, Lining, Embellishments, 34, 'tupac')
+obj2.get_graphic()
+obj2.iron()
+obj2.get_embellishment()
+obj2.thread.change_type("BSPP")
+obj2.get_neck()
+print("End of obj 2 (tshirt)")
+print("")
+
+obj3 = FleeceJacket("XL", "Blue", "TU", 33, Zipper, True, Pocket, Buttons, Lining, Embellishments, True, 3)
+obj3.iron()
+obj3.hoodhood()
+obj3.get_zipper()
+print(obj3.zip_num)
+obj3.get_zip_num()
+print("End of obj 3 (fleece jacket)")
