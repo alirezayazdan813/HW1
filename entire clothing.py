@@ -145,7 +145,7 @@ class Shirt(Clothing):
     def iron(self):
         print("Ironing instructions: Iron on medium heat")
 
-class Jeans(Clothing):
+class Jeans(Clothing,ABC):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell)
         self.style = style
@@ -230,7 +230,7 @@ class SkinnyJeans(Jeans):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, ripped):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
         self.ripped = ripped
-    
+
     def jean_type(self):
         print("It is skinny")
 
