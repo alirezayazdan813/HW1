@@ -1,3 +1,6 @@
+# import abstract method and using it in Jeans
+from abc import ABC, abstractmethod
+
 # The main class with color, zipper and pocket as protected variables to prevent mangling
 class Clothing:
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell):
@@ -147,6 +150,10 @@ class Jeans(Clothing):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell)
         self.style = style
 
+    @abstractmethod
+    def jean_type(self):
+        pass
+        
     def wash(self):
         print("Washing instructions: Machine wash in warm water, tumble dry low")
 
@@ -223,16 +230,25 @@ class SkinnyJeans(Jeans):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, ripped):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
         self.ripped = ripped
+    
+    def jean_type(self):
+        print("It is skinny")
 
 class BootcutJeans(Jeans):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, inseam):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
         self.inseam = inseam
+    
+    def jean_type(self):
+        print("It is bootcut")
 
 class StraightJeans(Jeans):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, stretch):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
         self.stretch = stretch
+
+    def jean_type(self):
+        print("It is StraightJean")
         
 # Grandchild classes for Shorts
 # cuffs in DenimSohorts and pattern in Boardshorts are private
@@ -305,3 +321,9 @@ obj3.get_zipper()
 print(obj3.zip_num)
 obj3.get_zip_num()
 print("End of obj 3 (fleece jacket)")
+print("")
+
+# abstract check
+obj4 = StraightJeans("Medium", "blue", "Zara", 22, Zipper, Pocket, Buttons, Lining, Embellishments, "Straight", "100cotton")
+obj4.jean_type()
+print(obj4.style)
