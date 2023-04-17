@@ -1,12 +1,16 @@
+# import abstract method and using it in Jeans
+from abc import ABC, abstractmethod
+
+# The main class with color, zipper and pocket as protected variables to prevent mangling
 class Clothing:
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell):
         self.size = size
-        self.color = color
+        self._color = color
         self.brand = brand
         self.price = price
 
-        self.zipper = Zip
-        self.pocket = Pock
+        self._zipper = Zip
+        self._pocket = Pock
         self.buttons = Butt
         self.lining = Lin
         self.embellishments = Embell
@@ -15,10 +19,10 @@ class Clothing:
         self.thread = Thread()
 
     def get_zipper(self):
-        return self.zipper.get_zip(self)
+        return self._zipper.get_zip(self)
 
     def get_pocket(self):
-        return self.pocket.put_item(self)
+        return self._pocket.put_item(self)
 
     def get_button(self):
         return self.buttons.add_button(self)
@@ -141,11 +145,15 @@ class Shirt(Clothing):
     def iron(self):
         print("Ironing instructions: Iron on medium heat")
 
-class Jeans(Clothing):
+class Jeans(Clothing,ABC):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell)
         self.style = style
 
+    @abstractmethod
+    def jean_type(self):
+        pass
+        
     def wash(self):
         print("Washing instructions: Machine wash in warm water, tumble dry low")
 
@@ -197,6 +205,7 @@ print("End of obj1 (socks)")
 print("")
 
 # Grandchild classes for Shirt
+# material_type in poloshirt is private
 class TShirt(Shirt):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length, graphic):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length)
@@ -214,7 +223,7 @@ class DressShirt(Shirt):
 class PoloShirt(Shirt):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length, material_type):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, sleeve_length)
-        self.material_type = material_type
+        self.__material_type = material_type
 
 # Grandchild classes for Jeans
 class SkinnyJeans(Jeans):
@@ -222,17 +231,27 @@ class SkinnyJeans(Jeans):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
         self.ripped = ripped
 
+    def jean_type(self):
+        print("It is skinny")
+
 class BootcutJeans(Jeans):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, inseam):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
         self.inseam = inseam
+    
+    def jean_type(self):
+        print("It is bootcut")
 
 class StraightJeans(Jeans):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style, stretch):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, style)
         self.stretch = stretch
+
+    def jean_type(self):
+        print("It is StraightJean")
         
 # Grandchild classes for Shorts
+# cuffs in DenimSohorts and pattern in Boardshorts are private
 class CargoShorts(Shorts):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length, number_of_pockets):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length)
@@ -241,12 +260,12 @@ class CargoShorts(Shorts):
 class BoardShorts(Shorts):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length, pattern):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length)
-        self.pattern = pattern
+        self.__pattern = pattern
 
 class DenimShorts(Shorts):
     def __init__(self, size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length, cuffs):
         super().__init__(size, color, brand, price, Zip, Pock, Butt, Lin, Embell, length)
-        self.cuffs = cuffs
+        self.__cuffs = cuffs
         
 # Grandchild classes for Socks
 class AnkleSocks(Socks):
@@ -265,6 +284,7 @@ class DressSocks(Socks):
         self.pattern = pattern
         
 # Grandchild classes for Jacket
+# material_type in BomberJacket is private
 class Windbreaker(Jacket):
     def __init__(self, size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded, waterproof):
         super().__init__(size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded)
@@ -273,7 +293,7 @@ class Windbreaker(Jacket):
 class BomberJacket(Jacket):
     def __init__(self, size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded, material_type):
         super().__init__(size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded)
-        self.material_type = material_type
+        self.__material_type = material_type
 
 class FleeceJacket(Jacket):
     def __init__(self, size, color, brand, price, Zip, ziptype, Pock, Butt, Lin, Embell, hooded, zip_num):
@@ -294,9 +314,16 @@ print("End of obj 2 (tshirt)")
 print("")
 
 obj3 = FleeceJacket("XL", "Blue", "TU", 33, Zipper, True, Pocket, Buttons, Lining, Embellishments, True, 3)
+print(obj3._color)
 obj3.iron()
 obj3.hoodhood()
 obj3.get_zipper()
 print(obj3.zip_num)
 obj3.get_zip_num()
 print("End of obj 3 (fleece jacket)")
+print("")
+
+# abstract check
+obj4 = StraightJeans("Medium", "blue", "Zara", 22, Zipper, Pocket, Buttons, Lining, Embellishments, "Straight", "100cotton")
+obj4.jean_type()
+print(obj4.style)
